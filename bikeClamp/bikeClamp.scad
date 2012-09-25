@@ -25,17 +25,15 @@ module bikeClamp(basesize=[60,16,10], handlebarDiam=20) {
             // screw holes to other plate
             translate([basesize[0]/2-1.5*screwDiam,0,0]) cylinder(r=screwDiam/2, h=basesize[2]*20, center=true);
             translate([-basesize[0]/2+1.5*screwDiam,0,0]) cylinder(r=screwDiam/2, h=basesize[2]*20, center=true);
-            // screwholes for upper »payload«
-            translate([-10,0,basesize[2]+20/2]) holeScrewPlusHex();
-            translate([10,0,basesize[2]+20/2]) holeScrewPlusHex();
+            // screwhole(s) for upper »payload«
+            //translate([-10,0,basesize[2]+20/2]) holeScrewPlusHex();
+            //translate([10,0,basesize[2]+20/2]) holeScrewPlusHex();
+            translate([0,0,basesize[2]+20/2]) holeScrewPlusHex();
         }
     }
 }
 
-//bikeClamp();
-
-module rasterWheel(){
-}
+bikeClamp();
 
 /*** Outtakes ***/
 
@@ -50,4 +48,17 @@ module rasterWheel(){
                 }
                 cube(basesize,center=true);
             }
+*/
+
+// blubb...
+/*
+module rasterWheel(r=20, h=20, numTeeth=32) {
+    // 2pi = 6.2831853071795864769252867665590057683943387987502116
+    c=r*6.283185307179;
+    wt=c/numTeeth;
+    we=wt/sqrt(2);
+    for( a =[0:360/numTeeth:360] )
+    rotate([0,45,0]) cube([we,h,ew], center=true);
+}
+//rasterWheel();
 */
