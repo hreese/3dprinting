@@ -32,12 +32,15 @@ module bikeClamp(basesize=[60,16,10], handlebarDiam=20) {
     }
 }
 
-bikeClamp();
+//bikeClamp();
 
-// Outtakes
+module rasterWheel(){
+}
 
+/*** Outtakes ***/
+
+// runde ecke
 /*
-            // runde ecke
             translate() intersection() {
                 difference() {
                     cube([8,100,8], center=true);
