@@ -47,7 +47,7 @@ module hsc_nipple(h=10, r=5, width=1, p=0.1, slitp=1.1, reinforce_base=true) {
                 translate([0,0,-1]) cylinder(r=r-width, h=h+2);
             }
             if (reinforce_base == true) {
-                #difference() {
+                difference() {
                     cylinder(r=r-width/2,h=r,center=true);
                     translate([0,0,r/2]) sphere(r=r-width);
                 }
@@ -62,16 +62,13 @@ module hsc_nipple(h=10, r=5, width=1, p=0.1, slitp=1.1, reinforce_base=true) {
 /*
 cylinderCutoutShape();
 */
-//translate([0,25,0])
-
+translate([0,15,0])
     union() {
     translate([0,0,1.5]) cylinder(r=6, h=3, center=true);
     translate([0,0,3]) hsc_nipple(r=4);
 }
 
-/*
 difference() {
-    translate([0,0,5]) cylinder(r=10, h=10, center=true);
-    hsc_hole();
+    translate([0,0,5]) cylinder(r=7, h=10, center=true);
+    hsc_hole(r=4);
 }
-*/
