@@ -69,13 +69,6 @@ module lowerBikeClamp(basesize=[60,16,20], handlebarDiam=11.6*2, scaleF=1.4) {
     }
 }
 
-// upper part
-translate([0,5,0]) rotate([-90,0,0]) translate([0,-8,0]) upperBikeClamp(basesize=[60,16,20], handlebarDiam=11.6*2, bevelRadius=10);
-
-// lower part
-translate([0,-5,0]) rotate([90,0,0]) translate([0,8,0])
-lowerBikeClamp(basesize=[60,16,20], handlebarDiam=11.6*2);
-
 /*** Outtakes ***/
 
 // blubb...
