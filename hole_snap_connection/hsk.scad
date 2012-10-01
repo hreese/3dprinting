@@ -17,23 +17,13 @@ module cylinderCutoutShape(h1=50, h2=5, w=1, angle=45) {
         ]);
 }
 
-module hsc_hole(h=10, r=5, width=1, p=0.1, scale_factor=1.05) {
-    l=r*p;  // länge endstücken
-    union() {
-        translate([0,0,h/2]) scale(scale_factor) cylinder(r=r, h=h, center=true);
-        translate([0,0,l/2]) scale(scale_factor) cylinder(r1=r+l, r2=r, h=l, center=true);
-        translate([0,0,l/2+h-3*l]) scale(scale_factor) cylinder(r1=r, r2=r+l, h=l, center=true);
-        translate([0,0,l+h-2*l]) scale(scale_factor) cylinder(r1=r+l, r2=r, h=2*l, center=true);
-    }
-}
-
-// nipple - socket
+// pin - socket
 // h: height
 // r: radius
 // width: thickness (<r)
 // p: ratio bead to radius
 // slitp: percentage of slit (below bead)
-module hsc_nipple(h=10, r=5, width=1, p=0.1, slitp=1.1, reinforce_base=true) {
+module hsc_pin(h=10, r=5, width=1, p=0.1, slitp=1.1, reinforce_base=true) {
     l=r*p;  // länge endstücken
     difference() {
         union() {
@@ -59,16 +49,13 @@ module hsc_nipple(h=10, r=5, width=1, p=0.1, slitp=1.1, reinforce_base=true) {
     }
 }
 
-/*
-cylinderCutoutShape();
-*/
-translate([0,15,0])
+module hsc_hole(h=10, r=5, width=1, p=0.1, scale_factor=1.05) {
+    l=r*p;  // länge endstücken
     union() {
-    translate([0,0,1.5]) cylinder(r=6, h=3, center=true);
-    translate([0,0,3]) hsc_nipple(r=4);
+        translate([0,0,h/2]) scale(scale_factor) cylinder(r=r, h=h, center=true);
+        translate([0,0,l/2]) scale(scale_factor) cylinder(r1=r+l, r2=r, h=l, center=true);
+        translate([0,0,l/2+h-3*l]) scale(scale_factor) cylinder(r1=r, r2=r+l, h=l, center=true);
+        translate([0,0,l+h-2*l]) scale(scale_factor) cylinder(r1=r+l, r2=r, h=2*l, center=true);
+    }
 }
 
-difference() {
-    translate([0,0,5]) cylinder(r=7, h=10, center=true);
-    hsc_hole(r=4);
-}
