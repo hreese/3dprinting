@@ -20,6 +20,8 @@ module dial (r=20, h=4, holespacing=1) {
     spaceFac=0.3;
     // width of dent + space next to it
     t_rad=diam/numDents/(1+spaceFac)/2;
+    // width of plug
+    plug_w=9;
     difference() {
         difference() {
             // main disc
@@ -46,19 +48,19 @@ module dial (r=20, h=4, holespacing=1) {
         translate([0,0,-h/2]) scale([1,1,h/20]) sphere(r=10/2, center=true);
     }
     // plug (Steck0r)
-    translate([0,0,h/2]) union() {
-        translate([0,0,7.1]) torus(7.8/2,5.8/2);
+    translate([0,0,h/2])
+    union() {
         difference() {
-            cylinder(r=8/2, h=7.1, center=false);
+            cylinder(r=plug_w/2, h=7.1, center=false);
             difference() {
-                cylinder(r=6.2/2, h=15, center=true);
+                cylinder(r=(plug_w-2)/2, h=15, center=true);
                 translate([5+1.6,0,0]) cube([10,10,100], center=true);
             }
         }
         //translate([0,0,-0.5]) cylinder(r1=10/2,r2=7.8/2,h=2.5+0.5);
         difference() {
-            cylinder(r=10/2+holespacing,h=(10-7.8)/2+holespacing);
-            translate([0,0,(10-7.8)/2+holespacing]) torus_scaled(10/2+holespacing,(10-7.8)/2+holespacing);
+            cylinder(r=10/2+holespacing,h=(10-plug_w)/2+holespacing);
+            translate([0,0,(10-plug_w)/2+holespacing]) torus_scaled(10/2+holespacing,(10-plug_w)/2+holespacing);
         }
     }
 }
