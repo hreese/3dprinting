@@ -37,19 +37,22 @@ module dial (r=20, h=4, holespacing=1) {
                 }
             }
         }
+        // dents
         for ( rot2 = [1:numDents/2]) {
             //%rotate([90,0,360/numDents/(1+spaceFac)]) torus_scaled(r_torus=r+h/2,r_ring=t_rad, scale_w=[0.25,1]);
-            rotate([90,0,rot2*360/numDents]) torus_scaled(r_torus=r+h/2,r_ring=t_rad, scale_w=[0.25,1]);
+            rotate([90,0,rot2*360/numDents]) torus_scaled(r_torus=r+h/2,r_ring=t_rad, scale_w=[0.35,1]);
         }
+        // press-"button"
+        translate([0,0,-h/2]) scale([1,1,h/20]) sphere(r=10/2, center=true);
     }
     // plug (Steck0r)
     translate([0,0,h/2]) union() {
-        //translate([0,0,7.1]) torus(7.8/2,5.8/2);
+        translate([0,0,7.1]) torus(7.8/2,5.8/2);
         difference() {
-            cylinder(r=7.9/2, h=7.1, center=false);
+            cylinder(r=8/2, h=7.1, center=false);
             difference() {
-                cylinder(r=5.9/2, h=15, center=true);
-                translate([5+1.45,0,0]) cube([10,10,100], center=true);
+                cylinder(r=6.2/2, h=15, center=true);
+                translate([5+1.6,0,0]) cube([10,10,100], center=true);
             }
         }
         //translate([0,0,-0.5]) cylinder(r1=10/2,r2=7.8/2,h=2.5+0.5);
