@@ -9,4 +9,4 @@ include $(wildcard *.deps)
 	openscad -m make -s $@ -d $@.deps $<
 
 clean:
-	rm -f *.stl *.deps
+	rm -f *.stl *.deps $(patsubst %.scad,%_export.gcode,$(wildcard part_*.scad))
