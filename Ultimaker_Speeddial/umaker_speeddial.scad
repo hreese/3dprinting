@@ -53,7 +53,7 @@ module dial (r=20, h=4, holespacing=1) {
         difference() {
             cylinder(r=plug_w/2, h=7.1, center=false);
             difference() {
-                cylinder(r=(plug_w-2)/2, h=15, center=true);
+                cylinder(r=6/2+0.1, h=15, center=true);
                 translate([5+1.6,0,0]) cube([10,10,100], center=true);
             }
         }
