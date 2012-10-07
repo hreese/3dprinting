@@ -45,7 +45,8 @@ module dial (r=20, h=4, holespacing=1) {
             rotate([90,0,rot2*360/numDents]) torus_scaled(r_torus=r+h/2,r_ring=t_rad, scale_w=[0.35,1]);
         }
         // press-"button"
-        translate([0,0,-h/2]) scale([1,1,h/20]) sphere(r=10/2, center=true);
+	// does not print well
+        //translate([0,0,-h/2]) scale([1,1,h/20]) sphere(r=10/2, center=true);
     }
     // plug (Steck0r)
     translate([0,0,h/2])
