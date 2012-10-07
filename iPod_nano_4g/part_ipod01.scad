@@ -15,14 +15,17 @@ difference() {
     }
     translate([0,50-80/2+5,0]) cube([53,100,7.2], center=true);
     //translate([0,50-80/2+5,1]) iPodShape();
-    translate([0,0,25]) hull() {
+    translate([0,0,25])
+    hull() {
         for(x=[-44/2+4/2,44/2-4/2]) {
             for(y=[-62/2+4/2,62/2-4/2]) {
                 translate([x,y,0]) rotate([0,0,0]) cylinder(r=4/2,h=50,center=true);
             }
         }
     }
-    translate([52.5/2-8,-62/2+0.5,0]) rotate([90,0,0]) cylinder(r1=9,r2=12,h=10+2);
+    translate([52.5/2-8,-62/2+0.5,0]) rotate([90,0,0]) union() {
+        cylinder(r1=8,r2=12,h=10);
+    }
     translate([0,0,-11]) union(){
         translate([0,0,50]) cylinder(r=6.2, h=100, center=true);
         translate([0,0,0]) cylinder(r=3.1, h=100, center=true);
