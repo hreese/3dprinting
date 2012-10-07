@@ -1,6 +1,6 @@
 include <umaker_speeddial.scad>
 
-$fn=32;
+$fn=64;
 
 dial(r=20);
 
