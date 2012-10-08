@@ -1,6 +1,6 @@
 //include <iPod_nano_4gen_bike_mount.scad>
 
-//$fn=32;
+$fn=16;
 //production=false;
 
 ipod_n4_height=70;        // top to bottom when looking at the display
@@ -38,7 +38,7 @@ module round_edges_box_hull(boundingbox=[1,1,1], r=0.1, only_bottom=false) {
 iPod-Stuff starts here
 */
 
-module haken(r1=3.5,r2=7, w=10) {
+module haken(r1=7,r2=10, w=10) {
     translate([r2,0,0])
     rotate([90,0,180])
     intersection() {
@@ -51,7 +51,7 @@ module haken(r1=3.5,r2=7, w=10) {
     }
 }
 
-module eckhaken(r1=3.5,r2=7) {
+module eckhaken(r1=7,r2=10) {
 rotate([0,0,-90])
     intersection() {
         difference() {
@@ -62,7 +62,7 @@ rotate([0,0,-90])
     }
 }
 
-module iPodStand (border=5, height=5, podx=ipod_n4_width, pody=ipod_n4_height, hole_r=ipod_n4_width/23, hole_spacing=3, no_hole_zone=[10,10]) {
+module iPodStand (border=5, height=5, podx=ipod_n4_width, pody=ipod_n4_height, podz=7, hole_r=ipod_n4_width/23, hole_spacing=3, no_hole_zone=[10,10]) {
     num_holes_x=floor((podx)/(2*hole_r+hole_spacing));
     num_holes_y=floor((pody)/(2*hole_r+hole_spacing));
     nhz_x = no_hole_zone[0]/2 + hole_r;
@@ -71,7 +71,7 @@ module iPodStand (border=5, height=5, podx=ipod_n4_width, pody=ipod_n4_height, h
         // baseplate
         union() {
             if ( production == true ) {
-                round_edges_box([podx+2*border,pody+2*border,height], r=3, center=true);
+                round_edges_box([podx+2*border,pody+2*border,height], r=2, center=true);
             } else {
                 cube([podx+2*border,pody+2*border,height], center=true);
             }
@@ -86,7 +86,7 @@ module iPodStand (border=5, height=5, podx=ipod_n4_width, pody=ipod_n4_height, h
         for(xc=[1:num_holes_x]) {
             for(yc=[1:num_holes_y]) {
                 assign (x=-podx/2+xc*(hole_spacing+hole_r*2), y=-pody/2+yc*(hole_spacing+hole_r*2)) {
-                    echo(x,abs(x), nhz_x);
+                    // echo(x,abs(x), nhz_x);
                     if( abs(x) >= nhz_x || abs(y) >= nhz_y) {
                         translate([x,y,0]) cylinder(r=hole_r, h=height+2, center=true);
                     }
@@ -97,14 +97,14 @@ module iPodStand (border=5, height=5, podx=ipod_n4_width, pody=ipod_n4_height, h
         translate([0,0,height/2-3]) cylinder(r=3.2, h=height, center=false);
         cylinder(r=1.5, h=12, center=true);
         // hole for earplug
-        translate([18,-pody/2,0])
-        rotate([90,0,0]) cylinder(r1=6,r2=10,h=border+0.1, center=false);
+        translate([18,-pody/2+0.5,0])
+        rotate([90,0,0]) cylinder(r1=6,r2=10,h=border+1, center=false);
     }
     // upper clamps
-    translate([-podx/2-3.5,0,height/2]) haken(r1=3.5, w=25);
-    rotate([0,0,180]) translate([-podx/2-3.5,0,height/2]) haken(r1=3.5,w=25);
-    translate([-15,0,0]) rotate([0,0,90]) translate([-pody/2-3.5,0,height/2]) haken(r1=3.5,w=10);
-    //translate([podx/2-3.5,-pody/2+3.5,height/2]) eckhaken(r1=3.5);
+    translate([-podx/2-border,0,height/2]) haken(r1=podz, r2=podz+border, w=25);
+    rotate([1,0,180]) translate([-podx/2-border,0,height/2]) haken(r1=podz,r2=podz+border, w=25);
+    translate([-15,0,0]) rotate([0,0,90]) translate([-pody/2-border,0,height/2]) haken(r1=podz, r2=podz+border, w=10);
+    //translate([podx/2-podz,-pody/2+podz,height/2]) eckhaken(r1=podz);
 }
 
 iPodStand();
