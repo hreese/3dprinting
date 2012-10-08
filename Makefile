@@ -6,7 +6,7 @@ all: ${TARGETS}
 include $(wildcard *.deps)
 
 %.stl: %.scad
-	openscad -m make -s $@ -d $@.deps $<
+	openscad -m make -D production=true -o $@ -d $@.deps $<
 
 clean:
 	rm -f *.stl *.deps $(patsubst %.scad,%_export.gcode,$(wildcard part_*.scad))
