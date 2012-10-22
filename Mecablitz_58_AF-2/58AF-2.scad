@@ -11,9 +11,11 @@ hexshifty = hexh+w;
 hexoffx   = hexw+w;
 hexoffy   = (hexw+w)/2;
 
-for (iy=[0:3]) {
-    translate([0,(w+sqrt(3)/2*hexw)*iy,0]) cylinder(r=hexw/2, h=hexh, $fn=6);
-    translate([3/4*(hexw)+w*sqrt(3)/2,(w+sqrt(3)/2*hexw)/2+iy*(w+sqrt(3)/2*hexw),0]) cylinder(r=hexw/2, h=hexh, $fn=6);
+for (ix=[0:3]) {
+    translate([ix*( 3/2*(hexw)+w*sqrt(3) ),0,0]) for (iy=[0:3]) {
+        translate([0,(w+sqrt(3)/2*hexw)*iy,0]) cylinder(r=hexw/2, h=hexh, $fn=6);
+        translate([3/4*(hexw)+w*sqrt(3)/2,(w+sqrt(3)/2*hexw)/2+iy*(w+sqrt(3)/2*hexw),0]) cylinder(r=hexw/2, h=hexh, $fn=6);
+    }
 }
 //for (iy=[0:1]) {
 //    translate([0,(hexw+w)*iy,0]) cylinder(r=hexw/2, h=hexh, $fn=6);
