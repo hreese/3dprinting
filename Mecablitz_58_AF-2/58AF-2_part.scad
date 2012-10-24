@@ -5,6 +5,11 @@ mb_edge   = 2.5;
 
 height_colorfilter = 52;
 
+/* hexdiam: space between two facing corners of a hextile
+ * spacing: space between every side of the adjacent hextiles
+ * heigt:   height (z-axis) of tiles
+ * widthxy: space (x- andy-axis) occupied by the hextiles 
+*/
 module hexpattern(hexdiam=8, spacing=2, height=40, widthx=100, widthy=100) {
     size_x = 3/2*(hexdiam)+spacing*sqrt(3);
     size_y = spacing+sqrt(3)/2*hexdiam;
