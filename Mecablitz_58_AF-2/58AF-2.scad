@@ -1,12 +1,9 @@
-// TODO: refactor into modules
-x1=67.8;
-x2=65.5;
-y=47.0;
-edge=2.5;
-w=1.6;
-hollowh=20;
-hexh=40;
-hexw=8;
+mb_width1 = 67.8;
+mb_width2 = 65.5;
+mb_height = 47.0;
+mb_edge   = 2.5;
+
+height_colorfilter = 52;
 
 module hexpattern(hexdiam=8, spacing=2, height=40, widthx=100, widthy=100) {
     size_x = 3/2*(hexdiam)+spacing*sqrt(3);
@@ -25,51 +22,45 @@ module hexpattern(hexdiam=8, spacing=2, height=40, widthx=100, widthy=100) {
         }
 }
 
-module mecablitz_58af2_hull_solid() {
-    x1=67.8;
-    x2=65.5;
-    y=47.0;
-    linear_extrude(height = hexh)
+module mecablitz_58af2_snoot_solid(h=20, w=0) {
+    linear_extrude(height = h)
         polygon(points = [
             //outer space
-            [-x1/2+edge-w,-y/2-w],
-            [x1/2-edge+w,-y/2-w],
-            [x1/2+w,-y/2+edge-w],
-            [x2/2+w,y/2-edge+w],
-            [x2/2-edge+w,y/2+w],
-            [-x2/2+edge-w,y/2+w],
-            [-x2/2-w,y/2-edge+w],
-            [-x1/2-w,-y/2+edge-w],
+            [-mb_width1/2+mb_edge-w,-mb_height/2-w],
+            [mb_width1/2-mb_edge+w,-mb_height/2-w],
+            [mb_width1/2+w,-mb_height/2+mb_edge-w],
+            [mb_width2/2+w,mb_height/2-mb_edge+w],
+            [mb_width2/2-mb_edge+w,mb_height/2+w],
+            [-mb_width2/2+mb_edge-w,mb_height/2+w],
+            [-mb_width2/2-w,mb_height/2-mb_edge+w],
+            [-mb_width1/2-w,-mb_height/2+mb_edge-w],
             ], paths = [
             [0,1,2,3,4,5,6,7],
             ]
         );
 }
 
-module mecablitz_58af2_hull(h=hollowh+hexh) {
-    x1=67.8;
-    x2=65.5;
-    y=47.0;
+module mecablitz_58af2_hull(h=20, w=2) {
     linear_extrude(height = h)
         polygon(points = [
             //outer shape
-            [-x1/2+edge-w,-y/2-w],
-            [x1/2-edge+w,-y/2-w],
-            [x1/2+w,-y/2+edge-w],
-            [x2/2+w,y/2-edge+w],
-            [x2/2-edge+w,y/2+w],
-            [-x2/2+edge-w,y/2+w],
-            [-x2/2-w,y/2-edge+w],
-            [-x1/2-w,-y/2+edge-w],
+            [-mb_width1/2+mb_edge-w,-mb_height/2-w],
+            [mb_width1/2-mb_edge+w,-mb_height/2-w],
+            [mb_width1/2+w,-mb_height/2+mb_edge-w],
+            [mb_width2/2+w,mb_height/2-mb_edge+w],
+            [mb_width2/2-mb_edge+w,mb_height/2+w],
+            [-mb_width2/2+mb_edge-w,mb_height/2+w],
+            [-mb_width2/2-w,mb_height/2-mb_edge+w],
+            [-mb_width1/2-w,-mb_height/2+mb_edge-w],
             // inner shape
-            [-x1/2+edge,-y/2],
-            [x1/2-edge,-y/2],
-            [x1/2,-y/2+edge],
-            [x2/2,y/2-edge],
-            [x2/2-edge,y/2],
-            [-x2/2+edge,y/2],
-            [-x2/2,y/2-edge],
-            [-x1/2,-y/2+edge]
+            [-mb_width1/2+mb_edge,-mb_height/2],
+            [mb_width1/2-mb_edge,-mb_height/2],
+            [mb_width1/2,-mb_height/2+mb_edge],
+            [mb_width2/2,mb_height/2-mb_edge],
+            [mb_width2/2-mb_edge,mb_height/2],
+            [-mb_width2/2+mb_edge,mb_height/2],
+            [-mb_width2/2,mb_height/2-mb_edge],
+            [-mb_width1/2,-mb_height/2+mb_edge]
             ],
             paths = [
             [0,1,2,3,4,5,6,7],
@@ -78,5 +69,10 @@ module mecablitz_58af2_hull(h=hollowh+hexh) {
         );
 }
 
-//hexpattern();
-mecablitz_58af2_hull();
+union() {
+    difference() {
+        mecablitz_58af2_snoot_solid(h=40, w=1);
+        translate([0,0,-1]) hexpattern(hexdiam=7, h=40+2, spacing=1.2, widthx=65, widthy=50);
+    }
+    mecablitz_58af2_hull(h=60,w=3);
+}
