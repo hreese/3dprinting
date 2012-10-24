@@ -78,5 +78,5 @@ module mecablitz_58af2_hull(h=hollowh+hexh) {
         );
 }
 
-//hexpattern();
-mecablitz_58af2_hull();
+hexpattern(height=10);
+//mecablitz_58af2_hull();
