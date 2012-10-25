@@ -8,7 +8,7 @@ hrad = 5;
 offhx = 9;
 offhy = 2.5;
 
-$fn=36;
+$fn=64;
 module innenteil(h=6, w=0) {
     hull() {
         // unten link
@@ -39,3 +39,4 @@ module abdeckung() {
 }
 
 abdeckung();
+translate([0,45,0]) abdeckung();
