@@ -1,6 +1,7 @@
 dx = 103;
 dy = 33;
 dwidth = 2;
+dcornerrad=4;
 hx = 73;
 hy = 28;
 hwidth = 1.5;
@@ -25,11 +26,18 @@ module innenteil(h=6, w=0) {
 module abdeckung() {
     // Deckel
     difference(){ 
-        cube([dx, dy, dwidth]);
+        hull() {
+            translate([dcornerrad,dcornerrad,0]) cylinder(r=dcornerrad, h=dwidth);
+            translate([dcornerrad,dy-dcornerrad,0]) cylinder(r=dcornerrad, h=dwidth);
+            translate([dx-dcornerrad,dcornerrad,0]) cylinder(r=dcornerrad, h=dwidth);
+            translate([dx-dcornerrad,dy-dcornerrad,0]) cylinder(r=dcornerrad, h=dwidth);
+        }
         translate([dx/3,dy/2,0]) cylinder(r=2, h=40, center=true);
+        translate([0,dy/2,dwidth]) scale([offhx-dwidth,dy/2-dcornerrad,1]) sphere(r=1, center=true);
+        translate([dx,dy/2,dwidth]) scale([offhx-dwidth,dy/2-dcornerrad,1]) sphere(r=1, center=true);
     }
     difference() {
-        translate([0,0,dwidth]) innenteil();
+        translate([0,0,dwidth]) innenteil(h=6);
         translate([0,0,dwidth-1])innenteil(h=8, w=1.5);
         translate([0,offhy+hrad,-0.1]) cube([dx,1,15]);
         translate([0,offhy+hy-hrad-1,-0.1]) cube([dx,1,15]);
@@ -39,4 +47,4 @@ module abdeckung() {
 }
 
 abdeckung();
-translate([0,45,0]) abdeckung();
+//translate([0,45,0]) abdeckung();
