@@ -16,15 +16,18 @@ module innenteil(h=6, w=0) {
         // oben links
         translate([offhx+hrad+w, offhy-hrad+hy-w, 0]) cylinder(r=hrad, h=h);
         // unten rechts
-        translate([offhx+hrad+hx-w, offhy+hrad+w, 0]) cylinder(r=hrad, h=h);
+        translate([offhx+hrad+hx-2*hrad-w, offhy+hrad+w, 0]) cylinder(r=hrad, h=h);
         // oben rechts
-        translate([offhx+hrad+hx-w, offhy-hrad+hy-w, 0]) cylinder(r=hrad, h=h);
+        translate([offhx+hrad+hx-2*hrad-w, offhy-hrad+hy-w, 0]) cylinder(r=hrad, h=h);
     }
 }
 
 module abdeckung() {
     // Deckel
-    cube([dx, dy, dwidth]);
+    difference(){ 
+        cube([dx, dy, dwidth]);
+        translate([dx/3,dy/2,0]) cylinder(r=2, h=40, center=true);
+    }
     difference() {
         translate([0,0,dwidth]) innenteil();
         translate([0,0,dwidth-1])innenteil(h=8, w=1.5);
