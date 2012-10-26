@@ -1,10 +1,11 @@
-dx = 103;
+//dx = 103;
+dx = 96;
 dy = 33;
 dwidth = 2;
 dcornerrad=4;
 hx = 73;
 hy = 28;
-hwidth = 1.5;
+hwidth = 2.4;
 hrad = 5;
 offhx = 9;
 offhy = 2.5;
@@ -38,11 +39,11 @@ module abdeckung() {
     }
     difference() {
         translate([0,0,dwidth]) innenteil(h=6);
-        translate([0,0,dwidth-1])innenteil(h=8, w=1.5);
+        translate([0,0,dwidth-1])innenteil(h=8, w=hwidth);
         translate([0,offhy+hrad,-0.1]) cube([dx,1,15]);
         translate([0,offhy+hy-hrad-1,-0.1]) cube([dx,1,15]);
         translate([offhx+hrad,0,-0.1]) cube([1,dy,15]);
-        translate([offhx+hx+hrad-1,0,-0.1]) cube([1,dy,15]);
+        translate([offhx+hx-hrad-1,0,-0.1]) cube([1,dy,15]);
     }
 }
 
