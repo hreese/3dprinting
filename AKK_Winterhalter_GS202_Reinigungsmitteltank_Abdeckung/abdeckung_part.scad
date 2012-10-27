@@ -64,7 +64,7 @@ module abdeckung() {
             translate([0,dy/2,dwidth]) scale([offhx-dwidth,dy/2-dcornerrad,1]) sphere(r=1, center=true);
             translate([dx,dy/2,dwidth]) scale([offhx-dwidth,dy/2-dcornerrad,1]) sphere(r=1, center=true);
         }
-        translate([0,0,-0.01]) innenteil();
+        translate([0,0,-0.01]) innenteil(wbot=4, wtop=2);
     }
 }
 
