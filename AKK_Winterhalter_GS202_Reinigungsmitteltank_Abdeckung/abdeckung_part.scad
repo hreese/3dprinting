@@ -12,39 +12,20 @@ offhy = 2.5;
 
 $fn=64;
 
-module seitenteil_gerade(h=6, wbot=3.2, wtop=1.8) {
-    rotate([90,0,90]) linear_extrude(height = 1) {
-        polygon( points = [
-            [0, 0], [wbot, 0], [wtop, h], [0, h]
-            ], paths = [
-            [0,1,2,3]]);
-    }
-}
-
-module seitenteil_ecke(h=6, wbot=3.2, wtop=1.8, rad=6) {
-    intersection() {
-        translate([rad,rad,0]) rotate_extrude() {
-            polygon( points = [
-                [rad-wbot,0], [rad,0], [rad,h], [rad-wtop,h]
-                ], paths = [
-                [0,1,2,3]]);
-        }
-        cube([rad,rad,h]);
-    }
-}
+include <../mylib/reinforced_wall.scad>;
 
 module innenteil(h=6, wbot=3.2, wtop=1.8, rad=hrad, slit=1) {
     translate([offhx, offhy, dwidth]) {
         for(r=[0:1]) {
             translate([r*(hx), r*(hy)]) rotate([0,0,r*180]) {
                 // unten links
-                seitenteil_ecke(h=h, wbot=wbot, wtop=wtop, rad=rad);
+                reinforced_edge(h=h, wbot=wbot, wtop=wtop, rad=rad);
                 // unten
-                translate([rad+slit,0,0]) scale([hx-2*rad-2*slit,1,1]) seitenteil_gerade();
+                translate([rad+slit,0,0]) scale([hx-2*rad-2*slit,1,1]) reinforced_wall();
                 // unten rechts
-                translate([hx,0,0]) rotate([0,0,90]) seitenteil_ecke(h=h, wbot=wbot, wtop=wtop, rad=rad);
+                translate([hx,0,0]) rotate([0,0,90]) reinforced_edge(h=h, wbot=wbot, wtop=wtop, rad=rad);
                 // links
-                #translate([0,hy-rad-slit,0]) rotate([0,0,-90]) scale([hy-2*rad-2*slit,1,1]) seitenteil_gerade();
+                translate([0,hy-rad-slit,0]) rotate([0,0,-90]) scale([hy-2*rad-2*slit,1,1]) reinforced_wall();
             }
         }
     }
