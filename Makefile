@@ -9,4 +9,4 @@ include $(wildcard *.deps)
 	openscad -m make -D production=true -o $@ -d $@.deps $<
 
 clean:
-	rm -f *.stl *.deps $(patsubst %.scad,%_export.gcode,$(wildcard *_part.scad))
+	rm -f *.stl *.deps $(patsubst %.scad,%.gcode,$(wildcard *.scad)) 
