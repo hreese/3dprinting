@@ -1,4 +1,4 @@
 *.swp
 *.stl
-*_export.gcode
+*.gcode
 *.deps
