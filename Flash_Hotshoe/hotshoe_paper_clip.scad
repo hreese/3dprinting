@@ -2,19 +2,21 @@ hs_w      = 18.0;
 hs_l      = 17.2;
 hs_h      = 1.9; // 2
 hs2_w     = 12;
-hs2_l     = hs_l+5;
+//hs2_l     = hs_l+5;
 hs2_h     = 2;
 hs2_x_off = (hs_w-hs2_w)/2;
 hs2_elev  = 1;
 hs3_l     = 12;
 hs3_h     = 5;
 hs3_w     = 0.8;
-//logodxf   = "HR.dxf";
-logodxf   = "HR.dxf";
 
-module hotshoe() {
+module hotshoe(
+    logofile="", logooffset=1,
+    len=5
+    ) {
+    hs2_l = hs_l+len;
     union() {
-        // lower hotshow
+        // lower hotshoe
         difference() {
             cube([hs_w, hs_l, hs_h]);
             translate([-1,hs_l,hs_h/3]) rotate([60,0,0]) cube([hs2_x_off+1, 10,10]);
@@ -40,7 +42,7 @@ module hotshoe() {
         difference() {
             union() {
                 // Logo
-                //translate([1,1,hs3_h-1]) linear_extrude(height=1+1) import(file=logodxf);
+                translate([logooffset,1,hs3_h-1]) linear_extrude(height=1+1) import(file=logofile);
                 // clasp
                 cube([hs2_w, hs3_l, hs3_h]);
                 translate([0,0,hs3_h/2]) scale([1,1.5,1]) rotate([0,90,0]) cylinder(h=hs2_w, r=hs3_h/2, $fn=36);
@@ -49,6 +51,3 @@ module hotshoe() {
         }
     }
 }
-
-hotshoe();
-

@@ -12,17 +12,7 @@ offhy = 2.5;
 
 $fn=64;
 
-//include <../mylib/reinforced_wall.scad>;
-
-module reinforced_wall(h=6, wbot=3.2, wtop=1.8) {
-    dent=0.4;
-    rotate([90,0,90]) linear_extrude(height = 1) {
-        polygon( points = [
-            [0, 0], [wbot, 0], [wtop, h], [0, h], [0, 2.4], [dent,1.2], [dent,0]
-            ], paths = [
-            [0,1,2,3,4,5,6,0]]);
-    }
-}
+include <../mylib/reinforced_wall.scad>;
 
 module innenteil(h=6, wbot=3.2, wtop=1.8, rad=hrad, slit=1) {
     translate([offhx, offhy, dwidth]) {
