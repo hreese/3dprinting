@@ -1,5 +1,5 @@
 height_handle = 3;
-height_cutter = 15;
+height_cutter = 25;
 
 rotate([0,180,0]) {
     linear_extrude(height=height_cutter) import(file="Z10.dxf", layer="cutter");
