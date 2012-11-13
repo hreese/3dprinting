@@ -1,5 +1,5 @@
 // http://www.thingiverse.com/thing:9095 (Knurled surface finishing library)
-include <knurledFinishLib.scad>
+include <knurledFinishLib_v2.scad>
 include <MCAD/nuts_and_bolts.scad>
 
 height = 10;
