@@ -21,11 +21,11 @@ module ipodStandTop(ipx=ipod_n4_width, ipy=ipod_n4_height, width=4, border=8) {
             translate([0,(-ipy-border+width)/2,-width/2]) cube([ipx+2*border, border+width, width], center=true);
             translate([0,(-ipy-border)/2,-3.5-width]) cube([2*border+ipx, border, 7], center=true);
             // klebelöcher
-            translate([0,0,-border-2.8*width]) {
-            translate([(ipx+border)/2,ipy/3,  0]) cylinder(r=2, h=border, $fn=36);
-            translate([(ipx+border)/2,-ipy/3, 0]) cylinder(r=2, h=border, $fn=36);
-            translate([-(ipx+border)/2,ipy/3, 0]) cylinder(r=2, h=border, $fn=36);
-            translate([-(ipx+border)/2,-ipy/3,0]) cylinder(r=2, h=border, $fn=36);
+            translate([0,0,-width-2.8*width]) {
+                translate([(ipx+border)/2,ipy/3,  0]) cylinder(r=2, h=width, $fn=36);
+                translate([(ipx+border)/2,-ipy/3, 0]) cylinder(r=2, h=width, $fn=36);
+                translate([-(ipx+border)/2,ipy/3, 0]) cylinder(r=2, h=width, $fn=36);
+                translate([-(ipx+border)/2,-ipy/3,0]) cylinder(r=2, h=width, $fn=36);
             }
         }
         // hole for earplug
