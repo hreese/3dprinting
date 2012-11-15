@@ -10,14 +10,20 @@ screw_head_h = 2;
 screw_m_value = 3;
 
 difference() {
-    knurled_cyl(chg=height, cod=rbig*2,
-                cwd=3.5, csh=3.5, cdp=1.25,
-                fsh=2, smt=0);
+    knurl(   
+        k_cyl_hg = height,
+        k_cyl_od = rbig*2,
+        knurl_wd = 3.5,
+        knurl_hg = 3.5,
+        knurl_dp = 1.25,
+        e_smooth = 1,
+        s_smooth = 0);
     translate([0,0,screw_head_h]) {
-        scale([1,1,5]) nutHole(screw_m_value);
+        scale([1,1,5]) nutHole(screw_m_value, tolerance=0.25);
     }
 }
 
+/*
 translate([2.2*rbig,0,0])
 intersection() {
     difference() {
@@ -26,3 +32,4 @@ intersection() {
     }
     cylinder(h=height-screw_head_h, r=rbig);
 }
+*/
