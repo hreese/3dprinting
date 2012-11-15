@@ -7,7 +7,7 @@ module bb_test(r1=5, r2=12, h=5) {
     }
 }
 
-module um_ballbearing_holder( bbr1=5/2, bbr2=12/2, bbw=7 ) {
+module um_ballbearing_holder( bbr1=6/2, bbr2=10/2, bbw=3 ) {
     x1 = 20;
     y1 = 27;
     z1 = 12;
@@ -52,4 +52,4 @@ module um_ballbearing_holder( bbr1=5/2, bbr2=12/2, bbw=7 ) {
 }
 
 rotate([-90,0,0]) 
-  um_ballbearing_holder(bbr1=5/2, bbr2=12/2, bbw=7);
+  um_ballbearing_holder(bbr1=6/2, bbr2=10/2, bbw=3);
