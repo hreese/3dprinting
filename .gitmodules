@@ -1,3 +1,6 @@
 [submodule "_extern/MCAD"]
 	path = _extern/MCAD
 	url = https://github.com/elmom/MCAD
+[submodule "_extern/OpenSCAD-Font-Importer"]
+	path = _extern/OpenSCAD-Font-Importer
+	url = https://github.com/brad/OpenSCAD-Font-Importer.git
