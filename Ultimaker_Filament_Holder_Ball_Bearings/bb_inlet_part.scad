@@ -52,4 +52,7 @@ module um_ballbearing_holder( bbr1=6/2, bbr2=10/2, bbw=3 ) {
 }
 
 rotate([-90,0,0]) 
+  // small 6/10/3 ball bearing for alternate extrusion feeder
   um_ballbearing_holder(bbr1=6/2, bbr2=10/2, bbw=3);
+  // Heiko's alternative bbs
+  //um_ballbearing_holder(bbr1=6/2, bbr2=19/2, bbw=6);
