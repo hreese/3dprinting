@@ -7,6 +7,7 @@ module bb_test(r1=5, r2=12, h=5) {
     }
 }
 
+// comments are mixed german/english because of laziness :-)
 module um_ballbearing_holder( bbr1=6/2, bbr2=10/2, bbw=3 ) {
     x1 = 20;
     y1 = 27;
@@ -16,7 +17,7 @@ module um_ballbearing_holder( bbr1=6/2, bbr2=10/2, bbw=3 ) {
     dwbb = 1; // distance wall to ball bearing
     roar = bbr1 + 1; // radius of abstandsring
     hwatb = 6.5; // height wooden arc to baseline
-    bboff = 1; // so viel steht das kugellager oben über
+    bboff = 2; // so viel steht das kugellager oben über
     hma = z1+hwatb-bbr2+bboff; // hoehe mittelachse
     rfs = 0.7; // radius fixierschraube
     x2 = x1+2*wallwidth+2*holdwidth;
@@ -43,7 +44,7 @@ module um_ballbearing_holder( bbr1=6/2, bbr2=10/2, bbw=3 ) {
         // achse
         difference() {
             translate([x1/2,0.01,hma]) rotate([-90,0,0]) cylinder(r=bbr1, h=bbw+2*dwbb);
-            translate([x1/2,-0.01,hma]) rotate([-90,0,0]) cylinder(r=rfs, h=0.7*y1+1);
+            //translate([x1/2,-0.01,hma]) rotate([-90,0,0]) cylinder(r=rfs, h=0.7*y1+1);
         }
         translate([x1/2,bbw+dwbb+0.01,hma]) rotate([-90,0,0]) cylinder(r=roar, h=dwbb);
     }
@@ -52,7 +53,8 @@ module um_ballbearing_holder( bbr1=6/2, bbr2=10/2, bbw=3 ) {
 }
 
 rotate([-90,0,0]) 
-  // small 6/10/3 ball bearing for alternate extrusion feeder
-  um_ballbearing_holder(bbr1=6/2, bbr2=10/2, bbw=3);
-  // Heiko's alternative bbs
-  //um_ballbearing_holder(bbr1=6/2, bbr2=19/2, bbw=6);
+  // TODO: insert correct values for your ball bearing
+  // bbr1: radius of ball bearing inner hole
+  // bbr2: radius of ball bearing
+  // bbw : width of ballbearing
+  um_ballbearing_holder(bbr1=6/2, bbr2=19/2, bbw=6);
