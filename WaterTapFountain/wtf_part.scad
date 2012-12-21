@@ -8,7 +8,7 @@ include <regular_shapes.scad>
  */
 // Radius of water outlet goes here
 tap_radius = 23.2/2;
-// Height == insertion depth
+// Height == maximum insertion depth
 tap_height = 30;
 // width of outer layer
 tap_wall_width = 2.8;
@@ -23,7 +23,7 @@ fountain_angle = 36;
 // layer width of 
 fountain_width = tap_wall_width;
 // higher value -> smoother shape
-$fn=128;
+$fn=48;
 
 difference() {
     union() {
