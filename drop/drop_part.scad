@@ -14,4 +14,5 @@ module drop(r=5, h=10, steps=32, fn=16) {
         }
     }
 }
-drop();
+
+drop(steps=32, h=15, fn=32);
