@@ -15,7 +15,7 @@ tap_wall_width = 2.8;
 // size of opening at the bottom
 tap_new_opening_radius = tap_radius - tap_wall_width;
 // radius of new water outlet
-fountain_radius = 4;
+fountain_radius = 3;
 // height of new water outlet
 fountain_height = 16;
 // ejection angle of new water jet
@@ -23,7 +23,7 @@ fountain_angle = 36;
 // layer width of 
 fountain_width = tap_wall_width;
 // higher value -> smoother shape
-$fn=48;
+$fn=128;
 
 difference() {
     union() {
