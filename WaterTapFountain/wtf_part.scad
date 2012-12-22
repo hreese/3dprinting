@@ -25,7 +25,7 @@ fountain_angle = 36;
 // layer width of 
 fountain_width = tap_wall_width;
 // higher value -> smoother shape
-$fn=64;
+$fn=128;
 
 // don't touch below this point
 tap_r1=tap_radius+tap_wall_width;
@@ -59,7 +59,7 @@ difference() {
         }
         // fountain
         translate([0,0,fountain_radius+fountain_width]) union() {
-            translate([(tap_radius+tap_wall_width)/2,0,0]) teardrop(fountain_radius, tap_radius+tap_wall_width, 90);
+            #translate([(tap_radius+tap_wall_width)/2,0,0]) teardrop(fountain_radius, tap_radius+tap_wall_width, 90);
             translate([tap_radius+tap_wall_width,0,0]) {
                 sphere(r=fountain_radius);
                 rotate([0,fountain_angle,0]) cylinder(r=fountain_radius, h=fountain_height+1);
