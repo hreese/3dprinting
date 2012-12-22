@@ -7,9 +7,11 @@ include <regular_shapes.scad>
  * You may change any other value. but the defaults should be fine.
  */
 // Radius of water outlet goes here
-tap_radius = 23.2/2;
+tap_radius = 22.8/2;
 // Height == maximum insertion depth
 tap_height = 30;
+// …
+tap_tolerance = 0.2;
 // width of outer layer
 tap_wall_width = 2.8;
 // size of opening at the bottom
@@ -23,13 +25,17 @@ fountain_angle = 36;
 // layer width of 
 fountain_width = tap_wall_width;
 // higher value -> smoother shape
-$fn=128;
+$fn=64;
+
+// don't touch below this point
+tap_r1=tap_radius+tap_wall_width;
+tap_r2=(tap_radius+tap_wall_width)*(1+tap_tolerance);
 
 difference() {
     union() {
         // outer shell
-        cylinder(r=tap_radius+tap_wall_width, h=tap_height);
-        translate([0,0,tap_height]) torus(tap_radius+tap_wall_width, tap_radius);
+        cylinder(r1=tap_r1, r2=tap_r2, h=tap_height);
+        translate([0,0,tap_height]) torus(tap_r2, tap_radius*(1+tap_tolerance));
         // fountain
         intersection() {
             translate([0,0,fountain_radius+fountain_width]) union() {
@@ -48,7 +54,7 @@ difference() {
     union() {
         // inner space
         translate([0,0,-0.05]) union() {
-            translate([0,0,tap_wall_width]) cylinder(r=tap_radius, h=tap_height-tap_wall_width+1);
+            translate([0,0,tap_wall_width]) cylinder(r1=tap_radius, r2=tap_radius*(1+tap_tolerance), h=tap_height-tap_wall_width+1);
             cylinder(r1=tap_new_opening_radius, r2=tap_radius, h=tap_wall_width);
         }
         // fountain
