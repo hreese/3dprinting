@@ -1,12 +1,22 @@
 scale_f=2.5;
 edge_fac=1.3;
+screw_diam=2.5;
 
 module tetris_raw() {
-    intersection() {
-        cube([10,10,10], center=true);
-        rotate([45,0,0]) cube([10*edge_fac,10*edge_fac,10*edge_fac], center=true);
-        rotate([45,0,90]) cube([10*edge_fac,10*edge_fac,10*edge_fac], center=true);
-        rotate([45,90,90]) cube([10*edge_fac,10*edge_fac,10*edge_fac], center=true);
+    difference() {
+        intersection() {
+            // basic block
+            cube([10,10,10], center=true);
+            // beveled edges
+            rotate([45,0,0]) cube([10*edge_fac,10*edge_fac,10*edge_fac], center=true);
+            rotate([45,0,90]) cube([10*edge_fac,10*edge_fac,10*edge_fac], center=true);
+            rotate([45,90,90]) cube([10*edge_fac,10*edge_fac,10*edge_fac], center=true);
+        }
+        // screw hole
+        union() {
+            translate([0,0,-5]) cylinder(r=screw_diam/2/scale_f, h=10, center=true, $fn=32);
+            translate([0,0,-0.001]) cylinder(r1=screw_diam/2/scale_f, r2=0, h=screw_diam/2/scale_f,$fn=32);
+        }
     }
 }
 
