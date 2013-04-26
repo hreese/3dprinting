@@ -1,3 +1,7 @@
+/* Tetris-Blocks are 10x10x10 cm to ease modelling and are scaled by
+   scale_fac in the *_part.scad-files.
+*/
+
 scale_f=2.5;
 edge_fac=1.3;
 screw_diam=2.5;
@@ -20,7 +24,8 @@ module tetris_raw() {
     }
 }
 
-module bump(type = 0) {
+// generate different forms for cutting decorations from the side
+module decoration(type = 0) {
     if (type == 0) {
         translate([0,0,5.01]) rotate([0,180,45]) cylinder(r1=4.5, r2=2, h=1, $fn=4);
     }
@@ -38,95 +43,101 @@ module bump(type = 0) {
     }
 }
 
-// oben, vorne, hinten, rechts, links // unten ist [180,0,0]
-bump_all               = [[0,0,0], [90,0,0], [270,0,0], [90,0,90], [90,0,270]];
-bump_ohne_hinten       = [[0,0,0], [90,0,0], [90,0,90], [90,0,270]];
-bump_ohne_vorne        = [[0,0,0], [270,0,0], [90,0,90], [90,0,270]];
-bump_ohne_links        = [[0,0,0], [90,0,0], [270,0,0], [90,0,90]];
-bump_ohne_rechts       = [[0,0,0], [90,0,0], [270,0,0], [90,0,270]];
-bump_ohne_vornehinten  = [[0,0,0], [90,0,90], [90,0,270]];
-bump_ohne_vornerechts  = [[0,0,0], [270,0,0], [90,0,270]];
-bump_ohne_vornelinks   = [[0,0,0], [270,0,0], [90,0,90]];
-bump_ohne_hintenrechts = [[0,0,0], [90,0,0], [90,0,270]];
-bump_ohne_hintenlinks  = [[0,0,0], [90,0,0], [90,0,90]];
-bump_nur_obenvorne     = [[0,0,0], [90,0,0]];
+/* Configurations of sidedecorations
+   top, front, back, right, left // bottom would be [180,0,0]
+*/
+decoration_all                = [[0,0,0], [90,0,0],  [270,0,0], [90,0,90], [90,0,270]];
+decoration_without_back       = [[0,0,0], [90,0,0],  [90,0,90], [90,0,270]];
+decoration_without_front      = [[0,0,0], [270,0,0], [90,0,90], [90,0,270]];
+decoration_without_left       = [[0,0,0], [90,0,0],  [270,0,0], [90,0,90]];
+decoration_without_right      = [[0,0,0], [90,0,0],  [270,0,0], [90,0,270]];
+decoration_without_frontback  = [[0,0,0], [90,0,90], [90,0,270]];
+decoration_without_frontright = [[0,0,0], [270,0,0], [90,0,270]];
+decoration_without_frontleft  = [[0,0,0], [270,0,0], [90,0,90]];
+decoration_without_backright  = [[0,0,0], [90,0,0],  [90,0,270]];
+decoration_without_backleft   = [[0,0,0], [90,0,0],  [90,0,90]];
+decoration_only_topfront      = [[0,0,0], [90,0,0]];
 
-module tetris_block(myrot = bump_all, btype = 3) {
+// predefined side shaped
+i_decoration = 0;
+j_decoration = 2;
+l_decoration = 1;
+o_decoration = 0;
+s_decoration = 3;
+t_decoration = 0;
+z_decoration = 3;
+
+// create tetris-block with custom configuration for placement and
+// shape of the sidedecorations
+module tetris_block(myrot = decoration_all, btype = 3) {
     difference() {
         tetris_raw();
         for (rot = myrot ) {
-            rotate(rot) bump(btype);  // unten
+            rotate(rot) decoration(btype);  // unten
         }
     }
 }
 
-i_bump = 0;
 module i() {
     union() {
-        translate([0,0,0]) tetris_block(bump_ohne_hinten, i_bump);
-        translate([0,10,0]) tetris_block(bump_ohne_vornehinten, i_bump);
-        translate([0,20,0]) tetris_block(bump_ohne_vornehinten, i_bump);
-        translate([0,30,0]) tetris_block(bump_ohne_vorne, i_bump);
+        translate([0,0,0]) tetris_block(decoration_without_back, i_decoration);
+        translate([0,10,0]) tetris_block(decoration_without_frontback, i_decoration);
+        translate([0,20,0]) tetris_block(decoration_without_frontback, i_decoration);
+        translate([0,30,0]) tetris_block(decoration_without_front, i_decoration);
     }
 }
 
-j_bump = 2;
 module j() {
     union() {
-        translate([0,0,0]) tetris_block(bump_ohne_hinten, j_bump);
-        translate([0,10,0]) tetris_block(bump_ohne_vornehinten, j_bump);
-        translate([0,20,0]) tetris_block(bump_ohne_vornerechts, j_bump);
-        translate([10,20,0]) tetris_block(bump_ohne_links, j_bump);
+        translate([0,0,0]) tetris_block(decoration_without_back, j_decoration);
+        translate([0,10,0]) tetris_block(decoration_without_frontback, j_decoration);
+        translate([0,20,0]) tetris_block(decoration_without_frontright, j_decoration);
+        translate([10,20,0]) tetris_block(decoration_without_left, j_decoration);
     }
 }
 
-l_bump = 1;
 module l() {
     union() {
-        translate([0,0,0])    tetris_block(bump_ohne_hinten, l_bump);
-        translate([0,10,0])   tetris_block(bump_ohne_vornehinten, l_bump);
-        translate([0,20,0])   tetris_block(bump_ohne_vornelinks, l_bump);
-        translate([-10,20,0]) tetris_block(bump_ohne_rechts, l_bump);
+        translate([0,0,0])    tetris_block(decoration_without_back, l_decoration);
+        translate([0,10,0])   tetris_block(decoration_without_frontback, l_decoration);
+        translate([0,20,0])   tetris_block(decoration_without_frontleft, l_decoration);
+        translate([-10,20,0]) tetris_block(decoration_without_right, l_decoration);
     }
 }
 
-o_bump=0;
 module o() {
     union() {
-        translate([0,0,0])   tetris_block(bump_ohne_hintenrechts, o_bump);
-        translate([10,0,0])  tetris_block(bump_ohne_hintenlinks, o_bump);
-        translate([0,10,0])  tetris_block(bump_ohne_vornerechts, o_bump);
-        translate([10,10,0]) tetris_block(bump_ohne_vornelinks, o_bump);
+        translate([0,0,0])   tetris_block(decoration_without_backright, o_decoration);
+        translate([10,0,0])  tetris_block(decoration_without_backleft, o_decoration);
+        translate([0,10,0])  tetris_block(decoration_without_frontright, o_decoration);
+        translate([10,10,0]) tetris_block(decoration_without_frontleft, o_decoration);
     }
 }
 
-s_bump = 3;
 module s() {
     union() {
-        translate([10,0,0]) tetris_block(bump_ohne_hinten, s_bump);
-        translate([10,10,0]) tetris_block(bump_ohne_vornelinks, s_bump);
-        translate([0,10,0])  tetris_block(bump_ohne_hintenrechts, s_bump);
-        translate([0,20,0])  tetris_block(bump_ohne_vorne, s_bump);
+        translate([10,0,0]) tetris_block(decoration_without_back, s_decoration);
+        translate([10,10,0]) tetris_block(decoration_without_frontleft, s_decoration);
+        translate([0,10,0])  tetris_block(decoration_without_backright, s_decoration);
+        translate([0,20,0])  tetris_block(decoration_without_front, s_decoration);
     }
 }
 
-t_bump=0;
 module t() {
     union() {
-        translate([0,0,0])   tetris_block(bump_ohne_rechts, t_bump);
-        translate([10,0,0])  tetris_block(bump_nur_obenvorne, t_bump);
-        translate([20,0,0])  tetris_block(bump_ohne_links, t_bump);
-        translate([10,10,0]) tetris_block(bump_ohne_vorne, t_bump);
+        translate([0,0,0])   tetris_block(decoration_without_right, t_decoration);
+        translate([10,0,0])  tetris_block(decoration_nur_topfront, t_decoration);
+        translate([20,0,0])  tetris_block(decoration_without_left, t_decoration);
+        translate([10,10,0]) tetris_block(decoration_without_front, t_decoration);
     }
 }
 
-z_bump = 3;
 module z() {
     union() {
-        translate([0,0,0])   tetris_block(bump_ohne_hinten, z_bump);
-        translate([0,10,0])  tetris_block(bump_ohne_vornerechts, z_bump);
-        translate([10,10,0]) tetris_block(bump_ohne_hintenlinks, z_bump);
-        translate([10,20,0]) tetris_block(bump_ohne_vorne, z_bump);
+        translate([0,0,0])   tetris_block(decoration_without_back, z_decoration);
+        translate([0,10,0])  tetris_block(decoration_without_frontright, z_decoration);
+        translate([10,10,0]) tetris_block(decoration_without_backleft, z_decoration);
+        translate([10,20,0]) tetris_block(decoration_without_front, z_decoration);
     }
 }
 
