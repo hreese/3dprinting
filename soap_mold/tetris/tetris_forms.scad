@@ -126,7 +126,7 @@ module s() {
 module t() {
     union() {
         translate([0,0,0])   tetris_block(decoration_without_right, t_decoration);
-        translate([10,0,0])  tetris_block(decoration_nur_topfront, t_decoration);
+        #translate([10,0,0])  tetris_block(decoration_only_topfront, t_decoration);
         translate([20,0,0])  tetris_block(decoration_without_left, t_decoration);
         translate([10,10,0]) tetris_block(decoration_without_front, t_decoration);
     }
