@@ -53,17 +53,55 @@ module enclosure_shape(h = encl_full_height) {
 
 }
 
-difference() {
-    enclosure_shape();
-    union() {
-        // inner space
-        translate([wall_thickness, wall_thickness, wall_thickness]) {
-            cube([2 * cubie_offset_side + cubie_width,
-                  2 * cubie_offset_side + cubie_depth,
-                  encl_full_height]);
-        }
-        // everything in here is in "cubieboard-coordinates"
-        translate([wall_thickness + cubie_offset_side, wall_thickness + cubie_offset_side, wall_thickness + cubie_space_below]) {
+module hollow_cubie_enclosure() {
+    difference() {
+        enclosure_shape();
+        union() {
+            // inner space
+            translate([wall_thickness, wall_thickness, wall_thickness]) {
+                cube([2 * cubie_offset_side + cubie_width,
+                      2 * cubie_offset_side + cubie_depth,
+                      encl_full_height]);
+            }
+
         }
     }
 }
+
+module cubie_base_sockets(d1 = 6, d2 = 6 + cubie_offset_side, h1 = 2.5, hfull = cubie_space_below, screw_rad = encl_screw_rad) {
+    translate([0, 0, -hfull])
+    difference() {
+        union() {
+            translate([-d2/2, -d2/2, 0])        { cube([d2,d2,hfull-h1]); }
+            translate([-d1/2, -d1/2, hfull-h1]) { cube([d1,d1,h1]); }
+        }
+        translate([0, 0, -1]) { cylinder(r=screw_rad, h=hfull+2); }
+    }
+}
+
+module cubie_enclosure_with_sockets() {
+    union() {
+        hollow_cubie_enclosure();
+        // everything in here is in "cubieboard-coordinates"
+        translate([wall_thickness + cubie_offset_side, wall_thickness + cubie_offset_side, wall_thickness + cubie_space_below]) {
+            translate([23, 3.5, -0.001])    { cubie_base_sockets(); }
+            translate([96.5, 3.5, -0.001])  { cubie_base_sockets(h1 = cubie_space_below); }
+            translate([23, 56.5, -0.001])   { cubie_base_sockets(); }
+            translate([96.5, 56.5, -0.001]) { cubie_base_sockets(h1 = cubie_space_below); }
+        }
+    }
+}
+
+difference() {
+    cubie_enclosure_with_sockets();
+    // everything in here is in horizontal cubieboard-coordinates
+    translate([wall_thickness + cubie_offset_side, wall_thickness + cubie_offset_side, 0]) {
+        union() {
+            // GPIO ports
+            translate([42,0,-1]) { cube([51,8,wall_thickness+2]); }
+            translate([42,cubie_depth-8,-1]) { cube([51,8,wall_thickness+2]); }
+
+        }
+    }
+}
+// x: 42-94; y: 0-6
