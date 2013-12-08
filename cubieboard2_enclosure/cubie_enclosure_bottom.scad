@@ -100,7 +100,14 @@ difference() {
             // GPIO ports
             translate([42,0,-1]) { cube([51,8,wall_thickness+2]); }
             translate([42,cubie_depth-8,-1]) { cube([51,8,wall_thickness+2]); }
-
+            // parts on the side
+            translate([0, 0, cubie_space_below]) {
+                translate([0, -cubie_offset_side-wall_thickness-1, 0]) cube([20, wall_thickness+2, 15]); // micro-sd
+                translate([26, -cubie_offset_side-wall_thickness-1, 0]) cube([18, wall_thickness+2, 20]); // usb
+                translate([-cubie_offset_side-wall_thickness-1, 16, -2]) { cube([wall_thickness+2, 23, 12]); } // hdmi
+                translate([-cubie_offset_side-wall_thickness-1, 37, 0]) { cube([wall_thickness+2, 6, 4]); } // power
+                #rotate([0, 90, 0]) translate([-wall_thickness-cubie_offset_side-1, 0, 0]) cylinder(r=3, h=wall_thickness+2, center=true); // TODO
+            }
         }
     }
 }
