@@ -32,7 +32,7 @@ cube([base_extra_w + disp_l + base_extra_w, base_extra_w + pcb_h +26, plate_widt
 
 module hollow_spacer(r1=spacer_r, r2=1.5, h=plate_width+pcb_space_above) {
 	difference() {
-	cylinder(r=r1, h=h);
+	cylinder(r2=r1, r1=2*r1, h=h);
 	translate([0,0,-1]) cylinder(r=r2, h=h+2);
 	}
 }
