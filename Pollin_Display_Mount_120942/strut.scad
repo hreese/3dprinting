@@ -18,10 +18,9 @@ module strut() {
     }
 }
 
-module screw(r1=3/2, r2=8/2) {
+module screw(r1=5/2, r2=8/2) {
     union() {
         translate([0,0,-100/2+1])cylinder(r=r1, h=100, center=true);
         translate([0,0,100/2]) cylinder(r=r2, h=100, center=true);
     }
 }
-
