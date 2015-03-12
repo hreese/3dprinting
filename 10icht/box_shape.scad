@@ -59,11 +59,11 @@ module kiste() {
                 }
             }
             scale([1,1,0.95*(my_w-wall)/my_w]) _eckdingens(my_r);
-            translate([-10, 6.1, 0]) difference() {
-                cube([20,10,wall+5]);
+            translate([-9, 6.1, 0.1]) difference() {
+                cube([18,10,wall+5]);
                 union() {
-                    translate([4,5,wall]) cylinder(my_w, r_schraube1);
-                    translate([16,5,wall]) cylinder(my_w, r_schraube1);
+                    translate([3,5,wall+0.1]) cylinder(my_w, r_schraube1);
+                    translate([15,5,wall+0.1]) cylinder(my_w, r_schraube1);
                 }
             }
         }
