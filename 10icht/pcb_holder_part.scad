@@ -12,20 +12,11 @@ h_z = 30;
 
 wall = 4;
 
-rotate([0,-90,180]) {
-    difference() {
-        difference() {
-            difference() {
-                cube([h_x, h_y, h_z], center=true);
-                translate([0, 0, wall]) cube([h_x+2, h_y-2*wall, h_z], center=true);
-            }
-            translate([wall, 0, 10]) cube([pcb_x+wall, pcb_y, pcb_z], center=true);
-        }
-        union() {
-            translate([-30, -12, 0]) cylinder(h=40, r=2, center=true, $fn=32);
-            translate([-30, 12, 0])  cylinder(h=40, r=2, center=true, $fn=32);
-            translate([30, -12, 0])  cylinder(h=40, r=2, center=true, $fn=32);
-            translate([30, 12, 0])   cylinder(h=40, r=2, center=true, $fn=32);
-        }
+rotate([90,0,0]) difference() {
+    cube([20, 10, 30]);
+    union() {
+        translate([7, -1, 7]) cube([20, 12, 30]);
+        translate([-0.01, -1, 30-4]) cube([1+2,12,pcb_z]);
+        translate([15,10/2,-1]) cylinder(10, r=2, $fn=32);
     }
 }
