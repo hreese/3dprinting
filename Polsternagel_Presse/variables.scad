@@ -22,21 +22,25 @@ springheight = 0; // no spring
 magnetshaftstart = pinheight+magnetdistance;
 
 // diameter of punch tool (upper part of shaft)
-tooldiam=28;
+tooldiam=30;
 
 // acumulated height of tool
 toolheight=pinheight+magnetheight+magnetdistance+springheight+shaftheight;
 
-
 // end stop rail width
 esrailwidth=10;
 // end stop rail depth
-esraildepth=6;
+esraildepth=8;
 // end stop rail ration between thick and thin end
-esrailratio=0.6;
+esrailratio=1.4;
 // end stop rail height
 esrailheight=toolheight;
-// end stop rail screw holes
-esholes= [10,15,20,25,30,35,40];
-// end stop rail screw hole diameter
-esholediam=2.6;
+
+// distance between holes in end stop switch
+endstopholedistance = 10;
+// diameter of holes in end stop switch
+endstopholediam = 3;
+// vertical offset of end stop switch
+endstopsensoroffset = 0;
+// mounting plate thickness
+mplatethick = 6;
