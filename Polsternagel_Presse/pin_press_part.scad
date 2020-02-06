@@ -1,14 +1,11 @@
 include <variables.scad>
 include <endstop_rail.scad>
 
-//$fa=1;
-//$fs=0.05;
-
 module pin_press_tool() {
     difference() {
         union() {
             // outer body
-            cylinder(h=toolheight, d=tooldiam, $fn=100);
+            cylinder(h=toolheight, d=tooldiam);
             // rail for end stop
             for(i=[0:1]) {
                 rotate([0,0,90+180*i]) translate([0,-0.8*tooldiam/2,0]) endstop_rail(height=esrailheight, ratio=esrailratio);
@@ -16,11 +13,11 @@ module pin_press_tool() {
         }
         union () {
             // shaft for attachment to linear actuator
-            translate([0,0,magnetshaftstart+magnetheight+springheight]) cylinder(h=toolheight, d=shaftdiam, $fn=100);
+            translate([0,0,magnetshaftstart+magnetheight+springheight]) cylinder(h=toolheight, d=shaftdiam);
             // hole for vertical attachment to shaft
-            translate([0,0,magnetshaftstart+magnetheight+springheight+shaftdistancethroughhole])  rotate([90,0,0]) cylinder(d=throughholediam, h=2*tooldiam, center=true, $fn=100);
+            translate([0,0,magnetshaftstart+magnetheight+springheight+shaftdistancethroughhole])  rotate([90,0,0]) cylinder(d=throughholediam, h=2*tooldiam, center=true);
             // shaft for magnet
-            translate([0,0,magnetshaftstart]) cylinder(h=magnetheight+springheight+0.1, d=magnetdiam, $fn=100);
+            translate([0,0,magnetshaftstart]) cylinder(h=magnetheight+springheight+0.1, d=magnetdiam);
             // hole for pin
             translate([0,0,-0.001]) rotate_extrude($fn = 100) {
                 import("shape_pin.svg");
@@ -30,7 +27,7 @@ module pin_press_tool() {
                 rotate([0,0,90+180*i]) translate([0,-0.8*tooldiam/2,0]) endstop_rail_screwslit();
             }
             // champfer for easier insertion
-            translate([0,0,toolheight+shaftdiam/2]) sphere(d=shaftdiam*sqrt(2)+1, $fn = 100);
+            translate([0,0,toolheight+shaftdiam/2]) sphere(d=shaftdiam*sqrt(2)+1);
         }
     }
 }

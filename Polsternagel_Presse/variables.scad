@@ -1,3 +1,6 @@
+$fa=0.1;
+$fs=0.5;
+
 // Height distance pin (depends on shape in external svg file, don't change)
 pinheight = 6.3;
 
