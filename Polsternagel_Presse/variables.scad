@@ -2,7 +2,7 @@
 pinheight = 6.3;
 
 // diameter of linear actuator shaft 
-shaftdiam = 21;
+shaftdiam = 20.1;
 // height of linear actuator shaft 
 shaftheight = 18;
 // vertical position of shaft throughhole
@@ -11,11 +11,11 @@ shaftdistancethroughhole = 9;
 throughholediam = 6;
 
 // diameter of magnet to hold distance pin
-magnetdiam = 7.5;
+magnetdiam = 7;
 // height of magnet to hold distance pin
 magnetheight = 15;
 // distance of magnet to pin (to reduce magentic force)
-magnetdistance = 3;
+magnetdistance = 2.3;
 
 // length of spring above magnet
 springheight = 0; // no spring

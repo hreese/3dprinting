@@ -1,6 +1,9 @@
 include <variables.scad>
 include <endstop_rail.scad>
 
+//$fa=1;
+//$fs=0.05;
+
 module pin_press_tool() {
     difference() {
         union() {
@@ -22,11 +25,12 @@ module pin_press_tool() {
             translate([0,0,-0.001]) rotate_extrude($fn = 100) {
                 import("shape_pin.svg");
             }
-            // space for 
+            // space for screwhead
             for(i=[0:1]) {
                 rotate([0,0,90+180*i]) translate([0,-0.8*tooldiam/2,0]) endstop_rail_screwslit();
             }
-
+            // champfer for easier insertion
+            translate([0,0,toolheight+shaftdiam/2]) sphere(d=shaftdiam*sqrt(2)+1, $fn = 100);
         }
     }
 }
