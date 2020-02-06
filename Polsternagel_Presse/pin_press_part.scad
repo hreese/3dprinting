@@ -7,8 +7,8 @@ module pin_press_tool() {
             // outer body
             cylinder(h=toolheight, d=tooldiam);
             // rail for end stop
-            for(i=[0:1]) {
-                rotate([0,0,90+180*i]) translate([0,-0.8*tooldiam/2,0]) endstop_rail(height=esrailheight, ratio=esrailratio);
+            for(i=[0:2]) {
+                rotate([0,0,90+90*i]) translate([0,-0.8*tooldiam/2,0]) endstop_rail(height=esrailheight, ratio=esrailratio);
             }
         }
         union () {
@@ -23,8 +23,8 @@ module pin_press_tool() {
                 import("shape_pin.svg");
             }
             // space for screwhead
-            for(i=[0:1]) {
-                rotate([0,0,90+180*i]) translate([0,-0.8*tooldiam/2,0]) endstop_rail_screwslit();
+            for(i=[0:2]) {
+                rotate([0,0,90+90*i]) translate([0,-0.8*tooldiam/2,0]) endstop_rail_screwslit();
             }
             // champfer for easier insertion
             translate([0,0,toolheight+shaftdiam/2]) sphere(d=shaftdiam*sqrt(2)+1);

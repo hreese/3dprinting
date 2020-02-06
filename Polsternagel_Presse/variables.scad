@@ -30,20 +30,20 @@ tooldiam=30;
 // acumulated height of tool
 toolheight=pinheight+magnetheight+magnetdistance+springheight+shaftheight;
 
-// end stop rail width
+// endstop rail width
 esrailwidth=10;
-// end stop rail depth
+// endstop rail depth
 esraildepth=8;
-// end stop rail ration between thick and thin end
+// endstop rail ration between thick and thin end
 esrailratio=1.4;
-// end stop rail height
+// endstop rail height
 esrailheight=toolheight;
 
-// distance between holes in end stop switch
+// distance between holes in endstop switch
 endstopholedistance = 10;
-// diameter of holes in end stop switch
+// diameter of holes in endstop switch
 endstopholediam = 3;
-// vertical offset of end stop switch
-endstopsensoroffset = 0;
+// vertical offset of endstop switch
+endstopswitchoffset = 11;
 // mounting plate thickness
 mplatethick = 6;

@@ -6,7 +6,7 @@ sensorrailthickness = 3;
 sensorrailwidth = esrailwidth + 2*sensorrailthickness;
 sensorraildepth = 7;
 
-module endstopholder(spacing=endstopholedistance, offset=endstopsensoroffset, d=endstopholediam, platewidth=mplatethick) {
+module endstopholder(spacing=endstopholedistance, offset=0, d=endstopholediam, platewidth=mplatethick) {
     difference() {
         union() {
             translate([-sensorrailwidth/2,0,0]) cube([sensorrailwidth, sensorraildepth, esrailheight*0.5]);
@@ -25,10 +25,10 @@ module endstopholder(spacing=endstopholedistance, offset=endstopsensoroffset, d=
                 translate([ spacing/2,0,0]) translate([0,0,5]) rotate([90,0,0]) cylinder(d=d, h=20, center=true);
             }
             // fixation screw hole
-            translate([0,0,15]) rotate([90,0,0]) cylinder(d=3.3, h=10, center=true);
+            translate([0,0,17]) rotate([90,0,0]) cylinder(d=3.3, h=10, center=true);
         }
     }
 }
 
 //rotate([90,0,0])
-endstopholder(offset=8);
+endstopholder(offset=endstopswitchoffset);
