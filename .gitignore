@@ -1,4 +1,4 @@
 *.swp
-*.stl
 *.gcode
 *.deps
+*.log

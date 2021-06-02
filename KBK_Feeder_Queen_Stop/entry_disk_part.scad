@@ -1,11 +1,11 @@
 $fn=32;
 
-module entry_disk(r=50, h=2, pin_radius=0.6) {
+module entry_disk(r=50, h=2, pin_radius=1.0) {
   difference() {
     // disc
     union() {
-      cylinder($fn=128, r=r, h=h, center=true);
-      rotate_extrude($fn=128, convexity = 10) translate([r, 0, 0]) circle(r = h/2, $fn = 100);
+      cylinder($fn=64, r=r, h=h, center=true);
+      rotate_extrude($fn=64, convexity = 10) translate([r, 0, 0]) circle(r = h/2, $fn = 100);
     }
     // pinhole
     translate([0, -h/10, 0]) cylinder($fn=32, r=pin_radius, center=true, h=2*h);
@@ -21,7 +21,7 @@ module fillet_corner_cutter(fillet=2) {
 
 module handle(width=3, height=10, len=16, fillet=2) {
   // base with fillet
-  union() {
+  translate([0, 0, -fillet/2]) union() {
     translate([0,0,height/2+fillet]) 
     minkowski() {
       translate([0, 0, -fillet/2]) cube([width-(fillet), len-(fillet), height-(fillet)+fillet], center=true);
@@ -47,7 +47,8 @@ module kbk_disk (
   d_slit_queen  = 10,
   d_air_holes   = 3,
   l_slit_worker = 30,
-  l_slit_queen  = 25
+  l_slit_queen  = 25,
+  handle_angle  = 55
 ) {
   union() {
     difference() {
@@ -65,19 +66,21 @@ module kbk_disk (
       // air holes
       rotate([0, 0, 90]) translate([0, slit_offset, 0]) union() {
         // center
-        cylinder(d=d_air_holes, h=20, center=true, $fn=64);
+        cylinder(d=d_air_holes, h=20, center=true);
         // inner circle
-        for (angle = [0 : 45 : 360]) {
-          rotate([0, 0, angle]) translate([1.6*d_air_holes, 0 , 0]) cylinder(d=d_air_holes, h=20, center=true, $fn=64);
+	ring_one_steps = 7;
+        for (angle = [0 : 360/ring_one_steps : 360]) {
+          rotate([0, 0, angle]) translate([1.6*d_air_holes, 0 , 0]) cylinder(d=d_air_holes, h=20, center=true);
         }
         // outer circle
-        for (angle = [0 : 30 : 360]) {
-          rotate([0, 0, angle]) translate([1.8*1.6*d_air_holes, 0 , 0]) cylinder(d=d_air_holes, h=20, center=true, $fn=64);
+	ring_two_steps = 14;
+        for (angle = [0 : 360/ring_two_steps : 360]) {
+          rotate([0, 0, angle+180/ring_two_steps]) translate([1.8*1.6*d_air_holes, 0 , 0]) cylinder(d=d_air_holes, h=20, center=true);
         }
       }
     }
-    rotate([0, 0,  45]) translate([0, 38, 2]) handle();
-    rotate([0, 0, 225]) translate([0, 38, 2]) handle();
+    rotate([0, 0, handle_angle]) translate([0, 38, 2-0.1]) handle();
+    rotate([0, 0, 180+handle_angle]) translate([0, 38, 2-0.1]) handle();
   }
 }
 
