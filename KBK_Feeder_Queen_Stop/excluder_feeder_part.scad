@@ -4,6 +4,7 @@ epsilon=0.01;
 slotx = 94;
 sloty = 11;
 slotz = 9;
+numslots = 5;
 
 frontx = 120;
 fronty = 20;
@@ -11,6 +12,7 @@ frontz = 1.2;
 
 slitx = 80;
 slity = 4.3;
+slitdist = 2;
 
 pindiam = 1;
 pindist = 8;
@@ -24,9 +26,14 @@ difference() {
     translate([+slitx/2,0,0]) cylinder(d=slity, h=2*slotz);
     translate([-slitx/2,0,0]) cylinder(d=slity, h=2*slotz);
   }
-  translate([0, (sloty-slity)/2, -epsilon]) hull() {    // slit 2
-    translate([+slitx/2,0,0]) cylinder(d=slity, h=2*slotz);
-    translate([-slitx/2,0,0]) cylinder(d=slity, h=2*slotz);
+  swidth = slitx/numslots-slity-slitdist;
+  for (i = [0:numslots-1]) {
+    translate([i*(slitx/numslots+slity/2-slitdist/numslots), 0, 0]) {
+      translate([-slitx/2, (sloty-slity)/2, -epsilon]) hull() {    // slit 2
+        translate([swidth,0,0]) cylinder(d=slity, h=2*slotz);
+        translate([0,0,0]) cylinder(d=slity, h=2*slotz);
+      }
+    }
   }
   for (i=[-1,+1]) { // pinhole
     pinydist = max(pindist, fronty/2);
