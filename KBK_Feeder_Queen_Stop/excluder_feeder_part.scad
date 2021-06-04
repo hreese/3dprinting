@@ -14,7 +14,7 @@ slitx = 80;
 slity = 4.3;
 slitdist = 2;
 
-pindiam = 1;
+pindiam = 2;
 pindist = 8;
 
 difference() {
