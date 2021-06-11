@@ -1,6 +1,7 @@
 $fn=32;
+epsilon=0.01;
 
-module entry_disk(r=50, h=2, pin_radius=1.0) {
+module entry_disk(r=50, h=2, pin_diam1=4, pin_diam2=7) {
   difference() {
     // disc
     union() {
@@ -8,7 +9,7 @@ module entry_disk(r=50, h=2, pin_radius=1.0) {
       rotate_extrude($fn=64, convexity = 10) translate([r, 0, 0]) circle(r = h/2, $fn = 100);
     }
     // pinhole
-    translate([0, -h/10, 0]) cylinder($fn=32, r=pin_radius, center=true, h=2*h);
+    translate([0, -epsilon, 0]) cylinder($fn=32, d1=pin_diam1, d2=pin_diam2, center=true, h=h+2*epsilon);
   }
 }
 
@@ -79,8 +80,8 @@ module kbk_disk (
         }
       }
     }
-    rotate([0, 0, handle_angle]) translate([0, 38, 2-0.1]) handle();
-    rotate([0, 0, 180+handle_angle]) translate([0, 38, 2-0.1]) handle();
+    //rotate([0, 0, handle_angle]) translate([0, 38, 2-0.1]) handle();
+    //rotate([0, 0, 180+handle_angle]) translate([0, 38, 2-0.1]) handle();
   }
 }
 
