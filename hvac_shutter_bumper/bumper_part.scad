@@ -25,7 +25,8 @@ translate([0,0,5]) union() {
 
 ramplen=60;
 rampwidth=25;
-translate([0, 0, rampwidth/2]) rotate([0, 90, 0]) difference() {
+translate([0, 0, rampwidth/2]) rotate([0, 90, 0])
+difference() {
     // ramp
     intersection() {
     scale([1, 1, 0.5]) rotate([0, 90, 0]) cylinder(h=rampwidth, r=ramplen/2, center=true);
@@ -40,4 +41,6 @@ translate([0, 0, rampwidth/2]) rotate([0, 90, 0]) difference() {
     // Schraube
     translate([0,0,6]) translate([0,44/2,0]) rotate([90,0,0]) MyScrewHole(screwheight=44, screwdiam=4, headdiam=7, headheight=4, nutstart=36, nutdiam=7.8);
     //#translate([0,0,6]) translate([0,44/2,0]) rotate([90,0,0]) MyScrew(screwheight=44, screwdiam=4, headdiam=7, headheight=4);
+    // gewölbter Boden
+    translate([0,0,-9.5]) scale([1,1,0.1]) rotate([0,90,0]) cylinder(r=100, h=2*rampwidth,center=true);
 };
